@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircrafts</title>
+
+    <!-- Bootstrap + style.css z folderu static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="container my-5">    
+        <div class="row g-0 m-0">
+            <div class="col-md-12 m-0">
+                 <div class="card h-100">
+                    <div class="card-header p-0">
+                        <ul class="nav nav-tabs card-header-tabs nav-fill">
+                            <li class="nav-item">
+                            <a class="nav-link" aria-current="true" href="{{ url_for('b738') }}">BOEING</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url_for('airbus') }}">AIRBUS</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('embraer') }}">Embraer</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-0">
+            <div class="col-md-4">
+                <div class="card h-100">                 
+                    <img src="{{ url_for('static', filename='photo/sp-lra_01.jpg') }}" class="card-img-top aircraft-img" alt="SP-LRA">
+                    <div class="card-body">
+                        <h5 class="card-title">Boeing</h5>
+                        <h6 class="card-subtitle text-muted">B787-8</h6>
+                        <p class="card-text my-2">
+                            Boeing 787-8 to podstawowy, dwusilnikowy samolot szerokokadłubowy z rodziny Dreamliner. Zaprojektowany z myślą o wysokiej wydajności, zużywa około 20% mniej paliwa w porównaniu do starszych maszyn. Jest popularnym wyborem do obsługi tras transatlantyckich i ultra długodystansowych.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='photo/sp-lsa_01.jpg') }}" class="card-img-top aircraft-img" alt="SP-LSA">
+                    <div class="card-body">
+                        <h5 class="card-title">Boeing</h5>
+                        <h6 class="card-subtitle text-muted">B787-9</h6>
+                        <p class="card-text my-2">
+                            Boeing 787-9 to wydłużona, dwusilnikowa wersja szerokokadłubowego samolotu pasażerskiego nowej generacji. Maszyna zabiera na pokład od 250 do 290 pasażerów w konfiguracji dwuklasowej i charakteryzuje się zasięgiem przekraczającym \(14 \ 000\) km. Jest ceniona za wyjątkową paliwooszczędność oraz komfort podróży.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='photo/ph-bko_01.jpg') }}" class="card-img-top aircraft-img" alt="PH-BKO">
+                    <div class="card-body">
+                        <h5 class="card-title">Boeing</h5>
+                        <h6 class="card-subtitle text-muted">B787-10</h6>
+                        <p class="card-text my-2">
+                            Boeing 787-10 to największy i najdłuższy wariant z szerokokadłubowej rodziny Dreamliner. Może zabrać na pokład od 330 do nawet 344 pasażerów, oferując zasięg do 12 000 km. Został zaprojektowany z myślą o maksymalnej wydajności paliwowej i jest popularnym wyborem dla głównych linii lotniczych na długich dystansach.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS z folderu static -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
