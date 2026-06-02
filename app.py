@@ -12,6 +12,15 @@ conn = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor
 )
 
+# conn = pymysql.connect(
+#     host="zephyr.proxy.rlwy.net",
+#     port=26324,
+#     user="root",
+#     password="NdxajtflOEJCbxAqNEihvQhqodFOnJBw",
+#     database="railway",
+#     cursorclass=pymysql.cursors.DictCursor
+# )
+
 
 app = Flask(__name__)
 
@@ -35,15 +44,16 @@ def embraer():
 def europa():
     return render_template("europa.html")
 
-# @app.route("/linie")
-# def linie():
-#     return render_template("linie.html")
+@app.route("/linie")
+def linie():
+    return render_template("linie.html")
 
 @app.route("/db-test")
 def db_test():
     with conn.cursor() as cur:
         cur.execute("SELECT 1")
         result = cur.fetchone()
+        return f"DB OK: {result}"
 
 
 
