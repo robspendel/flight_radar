@@ -39,8 +39,8 @@ def europa():
 # def linie():
 #     return render_template("linie.html")
 
-@app.route("/linie")
-def linie():
+@app.route("/db-test")
+def db_test():
     with conn.cursor() as cur:
         cur.execute("SELECT 1")
         result = cur.fetchone()
