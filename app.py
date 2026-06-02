@@ -1,5 +1,18 @@
 from flask import Flask, render_template, request, redirect
 #import pyodbc
+import os
+import pymysql
+
+conn = pymysql.connect(
+    host=os.environ["MYSQLHOST"],
+    port=int(os.environ["MYSQLPORT"]),
+    user=os.environ["MYSQLUSER"],
+    password=os.environ["MYSQLPASSWORD"],
+    database=os.environ["MYSQLDATABASE"],
+    cursorclass=pymysql.cursors.DictCursor
+)
+
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -22,9 +35,17 @@ def embraer():
 def europa():
     return render_template("europa.html")
 
+# @app.route("/linie")
+# def linie():
+#     return render_template("linie.html")
+
 @app.route("/linie")
 def linie():
-    return render_template("linie.html")
+    with conn.cursor() as cur:
+        cur.execute("SELECT 1")
+        result = cur.fetchone()
+
+
 
 # ----------------------------------------------------
 # KONFIGURACJA POŁĄCZENIA
