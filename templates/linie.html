@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircrafts</title>
+
+    <!-- Bootstrap + style.css z folderu static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#0d6efd">
+
+    <!-- Ikona aplikacji -->
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon-192.png') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">LOTAIR</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Lotniska
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('europa') }}">Europa</a></li>
+            <li><a class="dropdown-item" href="#">Azja</a></li>
+            <li><a class="dropdown-item" href="#">Ameryka</a></li>
+            <li><a class="dropdown-item" href="#">Afryka</a></li>
+            <li><a class="dropdown-item" href="#">Australia</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url_for('linie') }}">Linie lotnicze</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Samoloty
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('boeing') }}">Boeing</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('airbus') }}">Airbus</a></li>
+            <li><a class="dropdown-item" href="#">Embraer</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1">Wyszukiwanie</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Szukaj">
+        <button class="btn btn-outline-success" type="submit">Szukaj</button>
+      </form>
+    </div>
+    </div>
+</nav>
+    
+
+   
+
+      
+
+    <!-- Bootstrap JS z folderu static -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("{{ url_for('static', filename='service-worker.js') }}")
+        .then(() => console.log("Service Worker zarejestrowany"))
+        .catch(err => console.log("SW error:", err));
+}
+</script>
+
+
+</body>
+</html>
+
