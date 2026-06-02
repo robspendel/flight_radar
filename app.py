@@ -17,6 +17,15 @@ def airbus():
 @app.route("/embraer")
 def embraer():
     return render_template("embraer.html")
+
+@app.route("/lotniska/europa")
+def europa():
+    return render_template("europa.html")
+
+@app.route("/linie")
+def linie():
+    return render_template("linie.html")
+
 # ----------------------------------------------------
 # KONFIGURACJA POŁĄCZENIA
 # ----------------------------------------------------
