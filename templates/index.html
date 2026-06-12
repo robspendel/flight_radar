@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
 
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <meta name="theme-color" content="#0d6efd">
 
     <!-- Ikona aplikacji -->
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon-192.png') }}">
-
 </head>
 
 <body>
@@ -26,7 +26,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
+
      <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
@@ -61,94 +61,68 @@
           <a class="nav-link disabled" href="#" tabindex="-1">Wyszukiwanie</a>
         </li>
       </ul>
+
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Szukaj">
         <button class="btn btn-outline-success" type="submit">Szukaj</button>
       </form>
+
     </div>
     </div>
 </nav>
-    
-<div class="container my-5">    
-    <div class="row g-0 m-0">
-        <div class="col m-0">
-            <div class="card border-0" >
-                
-                <!-- HEADER NA CAŁĄ SZEROKOŚĆ -->
-                <div class="card-header">
-                    <ul class="nav nav-pills card-header-pills">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ url_for('boeing') }}">BOEING</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('airbus') }}">AIRBUS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('embraer') }}">Embraer</a>
-                        </li>
-                    </ul>
-                </div>
 
-                <!-- TREŚĆ KARTY -->
-                <div class="card-body">
+<div class="container mt-4">
 
-                    <!-- TRZY KARTY OBOK SIEBIE -->
-                    <div class="row g-3">
+    <div class="table-responsive">
+        <button id="clearFilters" class="btn btn-sm btn-secondary mb-2">
+        Wyczyść filtry
+        </button>
 
-                        <div class="col-md-4 p-2">
-                            <div class="card h-100">
-                                <img src="{{ url_for('static', filename='photo/sp-lra_01.jpg') }}" class="card-img-top aircraft-img" alt="SP-LRA">
-                                <div class="card-body">
-                                    <h5 class="card-title">Boeing</h5>
-                                    <h6 class="card-subtitle text-muted">B787-8</h6>
-                                    <p class="card-text my-2">
-                                        Boeing 787-8 to podstawowy, dwusilnikowy samolot szerokokadłubowy z rodziny Dreamliner. Zaprojektowany z myślą o wysokiej wydajności, zużywa około 20% mniej paliwa w porównaniu do starszych maszyn. Jest popularnym wyborem do obsługi tras transatlantyckich i ultra długodystansowych.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+        <table id="flightsTable" class="table table-striped table-hover table-bordered">
 
-                        <div class="col-md-4 p-2">
-                            <div class="card h-100">
-                                <img src="{{ url_for('static', filename='photo/sp-lsa_01.jpg') }}" class="card-img-top aircraft-img" alt="SP-LSA">
-                                <div class="card-body">
-                                    <h5 class="card-title">Boeing</h5>
-                                    <h6 class="card-subtitle text-muted">B787-9</h6>
-                                    <p class="card-text my-2">
-                                        Boeing 787-9 to wydłużona, dwusilnikowa wersja szerokokadłubowego samolotu pasażerskiego nowej generacji. Maszyna zabiera na pokład od 250 do 290 pasażerów w konfiguracji dwuklasowej i charakteryzuje się zasięgiem przekraczającym \(14 \ 000\) km. Jest ceniona za wyjątkową paliwooszczędność oraz komfort podróży.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+            <!-- ========== HEADER ========== -->
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Wylot</th>
+                    <th>Przylot</th>
+                    <th>Linia</th>
+                    <th>Rejestracja</th>
+                </tr>
 
-                        <div class="col-md-4 p-2">
-                            <div class="card h-100">
-                                <img src="{{ url_for('static', filename='photo/ph-bko_01.jpg') }}" class="card-img-top aircraft-img" alt="PH-BKO">
-                                <div class="card-body">
-                                    <h5 class="card-title">Boeing</h5>
-                                    <h6 class="card-subtitle text-muted">B787-10</h6>
-                                    <p class="card-text my-2">
-                                        Boeing 787-10 to największy i najdłuższy wariant z szerokokadłubowej rodziny Dreamliner. Może zabrać na pokład od 330 do nawet 344 pasażerów, oferując zasięg do 12 000 km. Został zaprojektowany z myślą o maksymalnej wydajności paliwowej i jest popularnym wyborem dla głównych linii lotniczych na długich dystansach.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                <tr>
+                    <th><input type="text" class="form-control form-control-sm" placeholder="Data"></th>
+                    <th><input type="text" class="form-control form-control-sm" placeholder="Wylot"></th>
+                    <th><input type="text" class="form-control form-control-sm" placeholder="Przylot"></th>
+                    <th><input type="text" class="form-control form-control-sm" placeholder="Linia"></th>
+                    <th><input type="text" class="form-control form-control-sm" placeholder="Rejestracja"></th>
+                </tr>
+            </thead>
 
-                    </div><!-- row -->
-                </div><!-- card-body -->
+            <!-- ========== BODY ========== -->
+            <tbody>
+                {% for flight in flights %}
+                <tr data-flight='{{ flight.id }}'>
+                    <td>{{ flight['Data'] }}</td>
+                    <td>{{ flight['Wylot'] }}</td>
+                    <td>{{ flight['Przylot'] }}</td>
+                    <td>{{ flight['Linia'] }}</td>
+                    <td>{{ flight['Rejestracja'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
 
-            </div><!-- card -->
-        </div>
+        </table>
     </div>
+
 </div>
-   
 
-      
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
-    <!-- Bootstrap JS z folderu static -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script>
+<!-- Service Worker -->
+<script>
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("{{ url_for('static', filename='service-worker.js') }}")
         .then(() => console.log("Service Worker zarejestrowany"))
@@ -156,7 +130,158 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
+<!-- jQuery + DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+function formatDetails(data) {
+    return `
+        <div class="p-3 bg-light">
+
+            <div class="row">
+                <div class="col-md-3"><b>ID:</b> ${data.id || ""}</div>
+                <div class="col-md-3"><b>Znak:</b> ${data["Znak wywoławczy"] || ""}</div>
+                <div class="col-md-3"><b>Numer lotu:</b> ${data["Numer lotu"] || ""}</div>
+                <div class="col-md-3"><b>Typ:</b> ${data["Typ samolotu"] || ""}</div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-3"><b>Kod:</b> ${data["Kod samolotu"] || ""}</div>
+                <div class="col-md-3"><b>Plan start:</b> ${data["Planowana godzina startu"] || ""}</div>
+                <div class="col-md-3"><b>Start:</b> ${data["Godzina startu"] || ""}</div>
+                <div class="col-md-3"><b>Plan ląd.:</b> ${data["Przewidywana godzina lądowania"] || ""}</div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-3"><b>Lądowanie:</b> ${data["Godzina lądowania"] || ""}</div>
+                <div class="col-md-3"><b>Czas:</b> ${data["Czas lotu"] || ""}</div>
+                <div class="col-md-3"><b>Dystans:</b> ${data["Dystans"] || ""}</div>
+            </div>
+
+        </div>
+    `;
+}
+
+$(document).ready(function () {
+
+    // =========================
+    // DATATABLE INIT
+    // =========================
+    let table = $('#flightsTable').DataTable({
+        ordering: false,
+        pageLength: 25,
+        info: true,
+        searching: true,
+        orderCellsTop: true,
+
+        language: {
+            search: "Szukaj:",
+            lengthMenu: "Pokaż _MENU_ rekordów",
+            info: "Wyświetlono _START_ - _END_ z _TOTAL_ rekordów",
+            zeroRecords: "Brak wyników"
+        }
+    });
+
+    // =========================
+    // FILTER PER COLUMN (EXCEL STYLE)
+    // =========================
+    $('#flightsTable thead tr:eq(1) th input').on('keyup change clear', function () {
+
+        let colIndex = $(this).closest('th').index();
+
+        table.column(colIndex).search(this.value).draw();
+    });
+
+    // =========================
+    // FORMAT DETAILS (CHILD ROW)
+    // =========================
+    function formatDetails(data) {
+        return `
+            <div class="p-3 bg-light">
+
+                <div class="row">
+                    <div class="col-md-3"><b>ID:</b> ${data.id || ""}</div>
+                    <div class="col-md-3"><b>Znak:</b> ${data["Znak wywoławczy"] || ""}</div>
+                    <div class="col-md-3"><b>Numer lotu:</b> ${data["Numer lotu"] || ""}</div>
+                    <div class="col-md-3"><b>Typ:</b> ${data["Typ samolotu"] || ""}</div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-3"><b>Kod:</b> ${data["Kod samolotu"] || ""}</div>
+                    <div class="col-md-3"><b>Plan start:</b> ${data["Planowana godzina startu"] || ""}</div>
+                    <div class="col-md-3"><b>Start:</b> ${data["Godzina startu"] || ""}</div>
+                    <div class="col-md-3"><b>Plan ląd.:</b> ${data["Przewidywana godzina lądowania"] || ""}</div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-3"><b>Lądowanie:</b> ${data["Godzina lądowania"] || ""}</div>
+                    <div class="col-md-3"><b>Czas:</b> ${data["Czas lotu"] || ""}</div>
+                    <div class="col-md-3"><b>Dystans:</b> ${data["Dystans"] || ""}</div>
+                </div>
+
+            </div>
+        `;
+    }
+
+    // =========================
+    // ROW CLICK (MULTI EXPAND MODE)
+    // =========================
+    $('#flightsTable tbody').on('click', 'td', function () {
+
+        let tr = $(this).closest('tr');
+
+        if (tr.hasClass('child')) return;
+
+        let row = table.row(tr);
+        let flightId = tr.data('flight');
+
+        // toggle tylko tego wiersza (bez zamykania innych)
+        if (row.child.isShown()) {
+            row.child.hide();
+            tr.removeClass('table-primary');
+            return;
+        }
+
+        $.ajax({
+            url: '/flight/' + flightId,
+            method: 'GET',
+            dataType: 'json',
+
+            success: function (data) {
+                row.child(formatDetails(data)).show();
+                tr.addClass('table-primary');
+            }
+        });
+
+    });
+
+    // =========================
+    // CLEAR FILTERS
+    // =========================
+    $('#clearFilters').on('click', function () {
+
+        table.search('').draw();
+
+        $('#flightsTable thead tr:eq(1) th input').each(function () {
+            $(this).val('');
+        });
+
+        table.columns().search('').draw();
+
+        table.page('first').draw('page');
+    });
+
+});
+</script>
 
 </body>
 </html>
-
